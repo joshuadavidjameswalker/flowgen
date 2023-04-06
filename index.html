@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlowGen</title>
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,20 +13,20 @@
         <label for="inputText">Enter text:</label>
         <input type="text" id="inputText">
     </div>
+    <div>
+        <button id="nextStep">Next Step</button>
+        <button id="loopTo">Loop To</button>
+        <button id="choice">Choice</button>
+        <button id="decision" style="display:none;">Decision</button>
+    </div>
     <div id="choiceTextContainer" style="display:none;">
-        <label for="choiceTextYes">Choice Yes:</label>
+        <label for="choiceTextYes">Yes:</label>
         <input type="text" id="choiceTextYes">
-        <label for="choiceTextNo">Choice No:</label>
+        <label for="choiceTextNo">No:</label>
         <input type="text" id="choiceTextNo">
     </div>
-    <div>
-        <button id="nextStep" title="Click to create a linear node">Next Step</button>
-        <button id="loopTo" title="Click to create a node and loop back to a previous node">Loop To</button>
-        <button id="choice" title="Click to create a choice node with Yes and No options">Choice</button>
-        <button id="decision" style="display:none;" title="Click to create the decision nodes for the choice">Decision</button>
-    </div>
     <div id="loopToSelector" style="display:none;">
-        <label for="loopToOptions">Select a node to loop back:</label>
+        <label for="loopToOptions">Select loop destination:</label>
         <select id="loopToOptions"></select>
         <button id="confirmLoop">Confirm</button>
     </div>
