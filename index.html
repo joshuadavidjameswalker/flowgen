@@ -3,47 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowGen - Flowchart Maker</title>
+    <title>FlowGen - Flowchart Generator</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.5/dist/mermaid.min.js"></script>
 </head>
 <body>
-    <h1>FlowGen - Flowchart Maker</h1>
-    <div>
-        <input type="text" id="inputText" placeholder="Enter text for flowchart node">
-        <button id="nextStepBtn">Next Step</button>
-        <button id="loopBtn">Add Loop</button>
-        <button id="choiceBtn">Add Decision Point</button>
-        <div id="choiceTextContainer" style="display:none;">
-            <input type="text" id="choiceTextYes" placeholder="Enter text for Yes option">
-            <input type="text" id="choiceTextNo" placeholder="Enter text for No option">
-            <button id="decisionBtn">Decision</button>
-        </div>
-        <button id="deleteNodeBtn">Delete Node</button>
+    <h1>FlowGen - Flowchart Generator</h1>
+    <input type="text" id="inputText" placeholder="Enter text for your flowchart node">
+    <div id="choiceTextContainer" style="display: none;">
+        <input type="text" id="choiceTextYes" placeholder="Enter text for Yes option">
+        <input type="text" id="choiceTextNo" placeholder="Enter text for No option">
     </div>
-    <div>
-        <label for="lineStyle">Line Style:</label>
-        <select id="lineStyle">
-            <option value="solid">Solid</option>
-            <option value="dotted">Dotted</option>
-            <option value="dashed">Dashed</option>
-        </select>
-    </div>
-    <div>
-        <label for="boxShape">Box Shape:</label>
-        <select id="boxShape">
-            <option value="rect">Rectangle</option>
-            <option value="round">Rounded Rectangle</option>
-            <option value="circle">Circle</option>
-        </select>
-    </div>
-    <div>
-        <label for="boxColor">Box Color:</label>
-        <input type="color" id="boxColor" value="#3498db">
+    <button id="nextStepBtn">Next Step</button>
+    <button id="loopToBtn">Add Loop</button>
+    <button id="choiceBtn">Add Decision Point</button>
+    <button id="decisionBtn" style="display: none;">Decision</button>
+    <button id="deleteNodeBtn">Delete Node</button>
+    <button id="saveAsImageBtn">Save as Image</button>
+    <div id="loopToSelector" style="display: none;">
+        <label for="loopToNode">Select node to loop to:</label>
+        <select id="loopToNode"></select>
+        <button id="loopToConfirmBtn">Confirm Loop</button>
     </div>
     <div id="flowchartContainer"></div>
-    <button id="saveAsImageBtn">Save as Image</button>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.5/dist/mermaid.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
