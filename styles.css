@@ -1,5 +1,5 @@
 body {
-    font-family: 'Poppins', cursive;
+    font-family: 'Comfortaa', cursive;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -20,7 +20,7 @@ button {
 button.selected {
     background-color
 button.selected {
-    background-color: #D6E0F5;
+    background-color: #007BFF;
     color: white;
 }
 
