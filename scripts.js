@@ -1,6 +1,22 @@
 const nodes = [];
 const connections = [];
 
+let nodeId = 1;
+let flowchartData = "";
+
+const inputText = document.getElementById("inputText");
+const nextStepBtn = document.getElementById("nextStepBtn");
+const addDecisionPointBtn = document.getElementById("addDecisionPointBtn");
+const addLoopBtn = document.getElementById("addLoopBtn");
+const deleteNodeBtn = document.getElementById("deleteNodeBtn");
+const saveAsImageBtn = document.getElementById("saveAsImageBtn");
+const choiceTextContainer = document.getElementById("choiceTextContainer");
+const choiceTextYes = document.getElementById("choiceTextYes");
+const choiceTextNo = document.getElementById("choiceTextNo");
+const decisionBtn = document.getElementById("decisionBtn");
+const loopToNode = document.getElementById("loopToNode");
+const flowchart = document.getElementById("flowchart");
+
 function appendNode(text) {
   const node = {
     id: nodes.length + 1,
