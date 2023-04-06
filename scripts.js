@@ -9,6 +9,9 @@ const confirmLoopBtn = document.getElementById("confirmLoop");
 const flowchartContainer = document.getElementById("flowchartContainer");
 const saveAsImageBtn = document.getElementById("saveAsImage");
 const deleteNodeBtn = document.getElementById("deleteNode");
+const choiceTextContainer = document.getElementById("choiceTextContainer");
+const choiceTextYes = document.getElementById("choiceTextYes");
+const choiceTextNo = document.getElementById("choiceTextNo");
 
 let flowchartData = "graph LR;";
 let nodeId = 1;
@@ -59,30 +62,6 @@ confirmLoopBtn.addEventListener("click", () => {
 });
 
 choiceBtn.addEventListener("click", () => {
-    appendNode(inputText.value);
-    if (nodeId > 2) {
-        flowchartData += `A${nodeId - 2}-->|Yes|A${nodeId - 1};`;
-        appendNode("Sample No Text");
-        flowchartData += `A${nodeId - 3}-->|No|A${nodeId - 1};`;
-    }
-    updateFlowchart();
-});
-
-decisionBtn.addEventListener("click", () => {
-    appendNode(inputText.value);
-    if (nodeId > 2) {
-        flowchartData += `A${nodeId - 2}-->|No|A${nodeId - 1};`;
-        appendNode("Sample Yes Text");
-        flowchartData += `A${nodeId - 3}-->|Yes|A${nodeId - 1};`;
-    }
-    updateFlowchart();
-});
-
-// Save as Image and Delete Node buttons
-// ...
-
-
-choiceBtn.addEventListener("click", () => {
     choiceTextYes.value = "";
     choiceTextNo.value = "";
     choiceTextContainer.style.display = "block";
@@ -115,40 +94,38 @@ saveAsImageBtn.addEventListener("click", () => {
 deleteNodeBtn.addEventListener("click", () => {
     if (nodeId > 1) {
         const removedNode = nodes.pop();
-        flowchartData = flowchartData.replace(new RegExp(`${removedNode.id}\\("(.+?)"\\);`, "g"), "");
-        flowchartData = flowchartData.replace(new RegExp(`A${nodeId - 2}-->.*?${removedNode.id};`, "g"), "");
-        nodeId--;
-        updateFlowchart();
-    }
+        flowchartData = flowchartchartData.replace(new RegExp(${removedNode.id}\\("(.+?)"\\);, "g"), "");
+flowchartData = flowchartData.replace(new RegExp(A${nodeId - 2}-->.*?${removedNode.id};, "g"), "");
+nodeId--;
+updateFlowchart();
+}
 });
 
 // Add event listeners for highlighting the selected button
 [nextStepBtn, loopToBtn, choiceBtn].forEach(btn => {
-    btn.addEventListener("click", () => {
-        [nextStepBtn, loopToBtn, choiceBtn].forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-    });
+btn.addEventListener("click", () => {
+[nextStepBtn, loopToBtn, choiceBtn].forEach(b => b.classList.remove("selected"));
+btn.classList.add("selected");
+});
 });
 
 // Save as Image implementation (Add this to the bottom of the script)
 function saveSvgAsPng(svgElement, fileName) {
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
-
+const svgData = new XMLSerializer().serializeToString(svgElement);
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+const img = new Image();
+img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
     img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-       
-        ctx.drawImage(img, 0, 0);
-        const imgURL = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = imgURL;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-}
+    canvas.width = img.width;
+    canvas.height = img.height;
+   
+    ctx.drawImage(img, 0, 0);
+    const imgURL = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = imgURL;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
