@@ -91,8 +91,9 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "flowchart.svga.click();
-URL.revokeObjectURL(url);
+  a.download = "flowchart.svg";
+  a.click();
+  URL.revokeObjectURL(url);
 });
 
 </script>
