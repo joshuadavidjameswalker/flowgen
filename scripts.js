@@ -62,6 +62,8 @@ choiceBtn.addEventListener("click", () => {
     appendNode(inputText.value);
     if (nodeId > 2) {
         flowchartData += `A${nodeId - 2}-->|Yes|A${nodeId - 1};`;
+        appendNode("Sample No Text");
+        flowchartData += `A${nodeId - 3}-->|No|A${nodeId - 1};`;
     }
     updateFlowchart();
 });
@@ -70,44 +72,11 @@ decisionBtn.addEventListener("click", () => {
     appendNode(inputText.value);
     if (nodeId > 2) {
         flowchartData += `A${nodeId - 2}-->|No|A${nodeId - 1};`;
+        appendNode("Sample Yes Text");
+        flowchartData += `A${nodeId - 3}-->|Yes|A${nodeId - 1};`;
     }
     updateFlowchart();
 });
 
-saveAsImageBtn.addEventListener("click", () => {
-    const mermaidSvg = document.querySelector
-(".mermaid svg");
-    const svgString = new XMLSerializer().serializeToString(mermaidSvg);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const DOMURL = window.URL || window.webkitURL || window;
-    const img = new Image();
-    const svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    const url = DOMURL.createObjectURL(svg);
-
-    img.onload = function () {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        DOMURL.revokeObjectURL(url);
-
-        html2canvas(canvas).then((canvas) => {
-            canvas.toBlob((blob) => {
-                saveAs(blob, "flowchart.png");
-            });
-        });
-    };
-    img.src = url;
-});
-
-deleteNodeBtn.addEventListener("click", () => {
-    if (nodes.length > 0) {
-        const nodeIdToDelete = nodes[nodes.length - 1].id;
-        flowchartData = flowchartData.replace(new RegExp(`${nodeIdToDelete}\\(.*?\\);`, 'g'), '');
-        flowchartData = flowchartData.replace(new RegExp(`-->${nodeIdToDelete};`, 'g'), '');
-        flowchartData = flowchartData.replace(new RegExp(`${nodeIdToDelete}-->`, 'g'), '');
-        nodes.pop();
-        nodeId--;
-        updateFlowchart();
-    }
-});
+// Save as Image and Delete Node buttons
+// ...
