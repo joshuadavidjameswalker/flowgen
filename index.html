@@ -1,31 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowGen</title>
+    <title>Flowchart Maker</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>FlowGen - Flowchart Generator</h1>
+    <h1>Flowchart Maker</h1>
     <p><a href="how-to-use.html">How to Use</a></p>
-    <input type="text" id="inputText" placeholder="Enter text for the flowchart step">
-    <br>
+    <input type="text" id="inputText" placeholder="Enter text for the flowchart node">
     <button id="nextStepBtn">Next Step</button>
-    <button id="addLoopBtn">Add Loop</button>
-    <button id="addDecisionPointBtn">Add Decision Point</button>
+    <button id="loopBtn">Add Loop</button>
+    <button id="choiceBtn">Add Decision Point</button>
     <div id="choiceTextContainer" style="display: none;">
         <input type="text" id="choiceTextYes" placeholder="Enter text for Yes option">
         <input type="text" id="choiceTextNo" placeholder="Enter text for No option">
-        <br>
-        <button id="decisionBtn">Add Decision</button>
+        <button id="decisionBtn">Decision</button>
     </div>
-    <br>
-    <button id="deleteNodeBtn">Delete Node</button>
+    <select id="loopSelect" style="display: none;">
+        <option value="" disabled selected>Select the node to loop back to</option>
+    </select>
+    <input type="text" id="loopText" style="display: none;" placeholder="Enter text for the loop line">
     <button id="saveAsImageBtn">Save as Image</button>
-    <br>
-    <div id="flowchart"></div>
+    <button id="deleteNodeBtn">Delete Node</button>
+    <div id="nodesContainer"></div>
+    <div id="chartContainer">
+        <div id="flowchart"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.5/dist/mermaid.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
