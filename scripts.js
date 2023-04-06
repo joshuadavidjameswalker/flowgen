@@ -87,6 +87,8 @@ saveAsImageBtn.addEventListener("click", () => {
     if (svgElement) {
         saveSvgAsPng(svgElement, "flowchart.png");
     }
+});
+
 deleteNodeBtn.addEventListener("click", () => {
     if (nodeId > 1) {
         const removedNode = nodes.pop();
