@@ -1,48 +1,29 @@
 const inputText = document.getElementById("inputText");
-const nextStepBtn = document.getElementById("nextStepBtn");
+const nextBtn = document.getElementById("nextBtn");
 const loopBtn = document.getElementById("loopBtn");
 const choiceBtn = document.getElementById("choiceBtn");
-const choiceTextContainer = document.getElementById("choiceTextContainer");
+const saveBtn = document.getElementById("saveBtn");
+const deleteNodeBtn = document.getElementById("deleteNodeBtn");
+const loopOptions = document.getElementById("loopOptions");
 const choiceTextYes = document.getElementById("choiceTextYes");
 const choiceTextNo = document.getElementById("choiceTextNo");
 const decisionBtn = document.getElementById("decisionBtn");
-const deleteNodeBtn = document.getElementById("deleteNodeBtn");
-const saveAsImageBtn = document.getElementById("saveAsImageBtn");
 const flowchartContainer = document.getElementById("flowchartContainer");
-const lineStyle = document.getElementById("lineStyle");
-const boxShape = document.getElementById("boxShape");
-const boxColor = document.getElementById("boxColor");
 
 let nodeId = 1;
 let flowchartData = "";
 
 function updateFlowchart() {
-    mermaid.mermaidAPI.initialize({
-        startOnLoad: false,
-        theme: "default",
-        flowchart: {
-            curve: lineStyle.value,
-            useMaxWidth: true,
-            htmlLabels: true
-        },
-        shapeDefaults: {
-            node: {
-                shape: boxShape.value,
-                style: `fill:${boxColor.value};stroke:${boxColor.value};`
-            }
-        }
-    });
-
-    const graphDefinition = "graph LR;" + flowchartData;
-    const svgGraph = mermaid.mermaidAPI.render("graphDiv", graphDefinition, () => { });
-    flowchartContainer.innerHTML = svgGraph;
+    flowchartContainer.innerHTML = flowchartData;
+    mermaid.init(undefined, ".flowchart");
 }
 
 function appendNode(text) {
-    flowchartData += `A${nodeId++}("${text}");`;
+    flowchartData += `A${nodeId}("${text}");`;
+    nodeId++;
 }
 
-nextStepBtn.addEventListener("click", () => {
+nextBtn.addEventListener("click", () => {
     appendNode(inputText.value);
     if (nodeId > 2) {
         flowchartData += `A${nodeId - 2}-->A${nodeId - 1};`;
@@ -54,50 +35,50 @@ loopBtn.addEventListener("click", () => {
     appendNode(inputText.value);
     if (nodeId > 2) {
         flowchartData += `A${nodeId - 2}-->A${nodeId - 1};`;
-        flowchartData += `A${nodeId - 1}-->A1;`;
     }
     updateFlowchart();
+    loopOptions.style.display = "block";
 });
 
 choiceBtn.addEventListener("click", () => {
-    choiceTextContainer.style.display = "inline";
-    decisionBtn.style.display = "inline";
+    appendNode(inputText.value);
+    if (nodeId > 2) {
+        flowchartData += `A${nodeId - 2}-->|Yes|A${nodeId - 1};`;
+    }
+    updateFlowchart();
+    choiceTextYes.style.display = "block";
+    choiceTextNo.style.display = "block";
+    decisionBtn.style.display = "block";
 });
 
 decisionBtn.addEventListener("click", () => {
     const yesText = choiceTextYes.value || "Yes";
     const noText = choiceTextNo.value || "No";
-
-    appendNode(inputText.value);
-    if (nodeId > 2) {
-        flowchartData += `A${nodeId - 2}-->|${yesText}|A${nodeId - 1};`;
-        appendNode(noText);
-        flowchartData += `A${nodeId - 3}-->|${noText}|A${nodeId - 1};`;
-    }
-
+    flowchartData += `A${nodeId - 1}-->|${yesText}|A${nodeId};`;
+    appendNode("Yes");
+    flowchartData += `A${nodeId - 2}-->|${noText}|A${nodeId};`;
+    appendNode("No");
     updateFlowchart();
-    choiceTextContainer.style.display = "none";
+    choiceTextYes.style.display = "none";
+    choiceTextNo.style.display = "none";
     decisionBtn.style.display = "none";
 });
 
 deleteNodeBtn.addEventListener("click", () => {
-    if (nodeId > 1) {
-        flowchartData = flowchartData.slice(0, -14);
-        nodeId--;
-        updateFlowchart();
-    }
+    nodeId--;
+    flowchartData = flowchartData.split(";").slice(0, -1).join(";") + ";";
+    updateFlowchart();
 });
 
-saveAsImageBtn.addEventListener("click", () => {
-    const svg = flowchartContainer.querySelector("svg");
+saveBtn.addEventListener("click", () => {
+    const flowchartSVG = document.querySelector("svg");
     const serializer = new XMLSerializer();
-    const svgBlob = new Blob([serializer.serializeToString(svg)], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(svgBlob);
-    const a = document.createElement("a");
+    const source = serializer.serializeToString(flowchartSVG);
 
+    const a = document.createElement("a");
+    const url = URL.createObjectURL(new Blob([source], { type: "image/svg+xml" }));
     a.href = url;
     a.download = "flowchart.svg";
     a.click();
-
     URL.revokeObjectURL(url);
 });
