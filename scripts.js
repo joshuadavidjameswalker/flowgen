@@ -57,6 +57,9 @@ confirmLoopBtn.addEventListener("click", () => {
     const selectedNodeId = loopToOptions.value;
     flowchartData += `A${nodeId - 1}-->${selectedNodeId};`;
     updateFlowchart();
+    loopToSelector.style.display = "none";
+});
+
 choiceBtn.addEventListener("click", () => {
     choiceTextYes.value = "";
     choiceTextNo.value = "";
