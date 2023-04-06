@@ -8,38 +8,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>FlowGen</h1>
-    <p><a href="how-to-use.html">How to Use</a></p>
-    <div>
-        <label for="inputText">Enter text:</label>
-        <input type="text" id="inputText">
-    </div>
-    <div>
-        <button id="nextStep">Next Step</button>
-        <button id="loopTo">Loop To</button>
-        <button id="choice">Choice</button>
-        <button id="decision" style="display:none;">Decision</button>
-    </div>
+    <h1>FlowGen - Flowchart Generator</h1>
+<p><a href="how-to-use.html">How to Use</a></p>
+    <input type="text" id="inputText" placeholder="Enter text for step">
+    <button id="nextStepBtn">Next Step</button>
+    <button id="loopToBtn">Add Loop</button>
+    <button id="choiceBtn">Add Decision Point</button>
     <div id="choiceTextContainer" style="display:none;">
-        <label for="choiceTextYes">Yes:</label>
-        <input type="text" id="choiceTextYes">
-        <label for="choiceTextNo">No:</label>
-        <input type="text" id="choiceTextNo">
+        <input type="text" id="choiceTextYes" placeholder="Enter text for Yes option">
+        <input type="text" id="sampleNoTextInput" placeholder="Enter text for No option"> <!-- New input field for No option -->
+        <button id="decisionBtn">Decision</button>
     </div>
-    <div id="loopToSelector" style="display:none;">
-        <label for="loopToOptions">Select loop destination:</label>
-        <select id="loopToOptions"></select>
-        <button id="confirmLoop">Confirm</button>
+    <div id="loopToContainer" style="display:none;">
+        <input type="number" id="loopToInput" placeholder="Enter step number to loop to">
+        <button id="loopToConfirmBtn">Confirm Loop</button>
     </div>
-    <div id="flowchartContainer"></div>
-    <div>
-        <button id="saveAsImage">Save as Image</button>
-        <button id="deleteNode">Delete Node</button>
+    <button id="saveAsImageBtn">Save as Image</button>
+    <button id="deleteNodeBtn">Delete Node</button>
+    <div id="chartContainer">
+        <div id="chart"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
