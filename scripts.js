@@ -126,4 +126,4 @@ function saveSvgAsPng(svgElement, fileName) {
         link.click();
         document.body.removeChild(link);
     };
-};
+});
