@@ -7,6 +7,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+  let nodeId = 1;
+  let flowchartData = "";
+
+  const inputText = document.getElementById("inputText");
+  const nextStepBtn = document.getElementById("nextStepBtn");
+  const addDecisionPointBtn = document.getElementById("addDecisionPointBtn");
+  const addLoopBtn = document.getElementById("addLoopBtn");
+  const deleteNodeBtn = document.getElementById("deleteNodeBtn");
+  const saveAsImageBtn = document.getElementById("saveAsImageBtn");
+  const choiceTextContainer = document.getElementById("choiceTextContainer");
+  const choiceTextYes = document.getElementById("choiceTextYes");
+  const choiceTextNo = document.getElementById("choiceTextNo");
+  const decisionBtn = document.getElementById("decisionBtn");
+  const loopToNode = document.getElementById("loopToNode");
+  const flowchart = document.getElementById("flowchart");
+
+  const updateFlowchart = () => {
+    flowchart.innerHTML = `<div class="mermaid">graph LR;${flowchartData}</div>`;
+    mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+  };
+
+  const appendNode = (text) => {
+    flowchartData += `A${nodeId}("${text}");`;
+    nodeId++;
+  };
+
+  nextStepBtn.addEventListener("click", () => {
+    appendNode(inputText.value);
+    if (nodeId > 2) {
+      flowchartData += `A${nodeId - 2}-->A${nodeId - 1};`;
+    }
+    updateFlowchart();
+  });
+
+  addDecisionPointBtn.addEventListener("click", () => {
+    choiceTextContainer.style.display = "block";
+    decisionBtn.style.display = "block";
+  });
+
+  decisionBtn.addEventListener("click", () => {
+    const yesText = choiceTextYes.value || "Yes";
+    const noText = choiceTextNo.value || "No";
+
+    appendNode(inputText.value);
+    if (nodeId > 2) {
+      flowchartData += `A${nodeId - 2}-->|${yesText}|A${nodeId - 1};`;
+      appendNode(noText);
+      flowchartData += `A${nodeId - 3}-->|${noText}|A${nodeId - 1};`;
+    }
+
+    updateFlowchart();
+    choiceTextContainer.style.display = "none";
+    decisionBtn.style.display = "none";
+  });
+
+  addLoopBtn.addEventListener("click", () => {
+    const targetNodeId = parseInt(loopToNode.value);
+    if (targetNodeId > 0 && targetNodeId < nodeId) {
+      flowchartData += `A${nodeId - 1}-->A${targetNodeId};`;
+      updateFlowchart();
+    } else {
+      alert("Invalid node number.");
+    }
+  });
+
+  deleteNodeBtn.addEventListener("click", () => {
+    if (nodeId > 1) {
+      flowchartData = flowchartData.replace(/A\d+\([^)]*\);$/, "");
+      flowchartData = flowchartData.replace(/A\d+-->(\|[^|]*\|)?A\d+;$/, "");
+      nodeId--;
+      updateFlowchart();
+    }
+  });
+
+  saveAsImageBtn.addEventListener("click", () => {
+    const svgElement = flowchart.querySelector("svg");
+    const serializer = new XMLSerializer();
+    const svgString = serializer.serializeToString(svgElement);
+
+    const blob = new Blob([svgString], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "flowchart.svga.click();
+URL.revokeObjectURL(url);
+});
+
+</script>
+
     <script>mermaid.initialize({startOnLoad:true});</script>
 </head>
 <body>
