@@ -1,18 +1,47 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Comfortaa', cursive;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
 h1 {
     text-align: center;
+    font-weight: 700;
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 div {
     margin-bottom: 20px;
 }
 
-button {
+label {
+    font-size: 18px;
     margin-right: 10px;
 }
+
+input {
+    font-size: 18px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    font
