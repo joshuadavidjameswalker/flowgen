@@ -1,12 +1,14 @@
 body {
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Poppins', sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #EFF3FB;
 }
 
 h1 {
     text-align: center;
+    color: #85A3E0;
 }
 
 div {
@@ -15,49 +17,27 @@ div {
 
 button {
     margin-right: 10px;
-}
-
-button.selected {
-    background-color
-button.selected {
-    background-color: #007BFF;
+    background-color: #152951;
     color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.tooltip {
-    position: relative;
-    display: inline-block;
+button:hover {
+    background-color: #1e3a6e;
 }
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
+button.selected {
+    background-color: #3c5a9a;
 }
 
-.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+input[type="text"] {
+    margin-left: 10px;
 }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+input[type="text"],
+select {
+    padding: 5px;
 }
