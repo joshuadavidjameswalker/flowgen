@@ -9,26 +9,23 @@
 </head>
 <body>
     <h1>FlowGen - Flowchart Generator</h1>
-<p><a href="how-to-use.html">How to Use</a></p>
-    <input type="text" id="inputText" placeholder="Enter text for step">
+    <p><a href="how-to-use.html">How to Use</a></p>
+    <input type="text" id="inputText" placeholder="Enter text for the flowchart step">
+    <br>
     <button id="nextStepBtn">Next Step</button>
-    <button id="loopToBtn">Add Loop</button>
-    <button id="choiceBtn">Add Decision Point</button>
-    <div id="choiceTextContainer" style="display:none;">
+    <button id="addLoopBtn">Add Loop</button>
+    <button id="addDecisionPointBtn">Add Decision Point</button>
+    <div id="choiceTextContainer" style="display: none;">
         <input type="text" id="choiceTextYes" placeholder="Enter text for Yes option">
-        <input type="text" id="sampleNoTextInput" placeholder="Enter text for No option"> <!-- New input field for No option -->
-        <button id="decisionBtn">Decision</button>
+        <input type="text" id="choiceTextNo" placeholder="Enter text for No option">
+        <br>
+        <button id="decisionBtn">Add Decision</button>
     </div>
-    <div id="loopToContainer" style="display:none;">
-        <input type="number" id="loopToInput" placeholder="Enter step number to loop to">
-        <button id="loopToConfirmBtn">Confirm Loop</button>
-    </div>
-    <button id="saveAsImageBtn">Save as Image</button>
+    <br>
     <button id="deleteNodeBtn">Delete Node</button>
-    <div id="chartContainer">
-        <div id="chart"></div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script src="scripts.js"></script>
+    <button id="saveAsImageBtn">Save as Image</button>
+    <br>
+    <div id="flowchart"></div>
+    <script src="script.js"></script>
 </body>
 </html>
